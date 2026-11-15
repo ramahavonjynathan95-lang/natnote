@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confidentialité — NatNote</title>
+<meta name="description" content="Politique de confidentialité de NatNote : vos documents restent chez vous.">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--v:#655E96;--v-d:#4E4880;--v-50:#F5F3FB;--v-100:#ECE9F7;--ink:#1F1D2B;--muted:#6B6880;--faint:#9C99AD;--line:#ECEAF2}
+*{box-sizing:border-box;margin:0}
+body{font:400 16px/1.7 Inter,"Segoe UI",system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+a{color:var(--v);text-decoration:none}
+a:hover{color:var(--v-d);text-decoration:underline}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;height:64px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:var(--ink)}
+.brand:hover{text-decoration:none;color:var(--ink)}
+.brand img{width:28px;height:28px;display:block}
+.back{margin-left:auto;font-size:14.5px;font-weight:500;color:var(--muted)}
+main{padding:64px 0 48px}
+h1{font-size:clamp(32px,5vw,44px);line-height:1.1;letter-spacing:-.03em;font-weight:700}
+.date{color:var(--faint);font-size:14px;margin-top:10px}
+.sum{margin:32px 0 8px;padding:20px 22px;border-radius:14px;background:var(--v-50);border:1px solid var(--v-100);color:var(--v-d);font-weight:500}
+h2{font-size:20px;letter-spacing:-.01em;margin:40px 0 10px}
+p,li{color:#3B3850}
+ul{padding-left:20px;margin-top:8px}
+li{margin:6px 0}
+footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--faint);font-size:13.5px}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="./"><img src="img/logo.png" alt="">NatNote</a>
+  <a class="back" href="./">← Retour au site</a>
+</div></header>
+
+<main class="wrap">
+  <h1>Politique de confidentialité</h1>
+  <p class="date">Dernière mise à jour : 15 novembre 2026</p>
+
+  <p class="sum">En bref : NatNote ne collecte aucune donnée. Vos documents restent sur votre ordinateur, ou dans votre propre Google Drive si vous choisissez de le connecter.</p>
+
+  <h2>Données collectées</h2>
+  <p>Aucune. NatNote n'a ni serveur, ni compte NatNote, ni publicité, ni statistiques d'utilisation, ni traceur. L'application ne nous envoie rien.</p>
+
+  <h2>Vos documents</h2>
+  <p>Les documents que vous créez sont enregistrés uniquement à l'endroit que vous choisissez sur votre ordinateur. Les réglages et les fichiers récents sont stockés localement, dans le dossier de l'application sur votre PC.</p>
+
+  <h2>Connexion Google Drive (facultative)</h2>
+  <p>Si vous connectez votre compte Google pour enregistrer dans le cloud :</p>
+  <ul>
+    <li>La connexion passe directement par la page officielle de Google. NatNote ne voit jamais votre mot de passe.</li>
+    <li>NatNote demande l'accès <b>drive.file</b> : il ne peut voir que les fichiers qu'il a lui-même créés ou que vous ouvrez avec lui, pas le reste de votre Drive.</li>
+    <li>Votre nom, votre adresse e-mail et votre photo de profil sont lus pour s'afficher dans l'application. Ils sont gardés uniquement sur votre PC.</li>
+    <li>L'autorisation de connexion est chiffrée avec votre session Windows et stockée sur votre PC.</li>
+    <li>Les échanges ont lieu directement entre votre ordinateur et Google. Aucun intermédiaire.</li>
+    <li>En vous déconnectant dans NatNote, l'autorisation est révoquée auprès de Google et supprimée de votre PC.</li>
+  </ul>
+  <p>L'utilisation de Google Drive est soumise à la <a href="https://policies.google.com/privacy" rel="noopener">politique de confidentialité de Google</a>.</p>
+
+  <h2>Partage avec des tiers</h2>
+  <p>NatNote ne vend, ne loue et ne partage aucune donnée, avec personne.</p>
+
+  <h2>Enfants</h2>
+  <p>NatNote ne collectant aucune donnée, il peut être utilisé à tout âge.</p>
+
+  <h2>Modifications</h2>
+  <p>Si cette politique change, la nouvelle version sera publiée sur cette page, avec la date de mise à jour.</p>
+
+  <h2>Contact</h2>
+  <p>Pour toute question, ouvrez un ticket sur <a href="https://github.com/ramahavonjynathan95-lang/natnote/issues" rel="noopener">la page GitHub du projet</a>.</p>
+</main>
+
+<footer><div class="wrap">© 2026 NatNote</div></footer>
+</body>
+</html>
