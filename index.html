@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NatNote — Écrire, simplement.</title>
+<meta name="description" content="NatNote, le traitement de texte épuré pour Windows. Gratuit, sans installation, compatible Word.">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --v:#655E96; --v-d:#4E4880; --v-50:#F5F3FB; --v-100:#ECE9F7; --v-200:#D9D3EF;
+  --ink:#1F1D2B; --muted:#6B6880; --faint:#9C99AD; --line:#ECEAF2; --bg:#fff;
+  --r:14px; --max:1080px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:400 16px/1.6 Inter,"Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* nav */
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+header.sc{border-color:var(--line)}
+.nav{display:flex;align-items:center;gap:28px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.01em}
+.brand img{width:28px;height:28px}
+.links{display:flex;gap:26px;margin-left:auto;font-size:14.5px;color:var(--muted);font-weight:500}
+.links a:hover{color:var(--ink)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 20px;border-radius:10px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:background .15s,transform .15s,box-shadow .15s}
+.btn.sm{height:36px;padding:0 14px;font-size:14px;border-radius:8px}
+.btn.pri{background:var(--v);color:#fff;box-shadow:0 1px 2px rgba(78,72,128,.3),0 8px 24px -10px rgba(101,94,150,.7)}
+.btn.pri:hover{background:var(--v-d);transform:translateY(-1px)}
+.btn.ghost{border-color:var(--line);color:var(--ink);background:#fff}
+.btn.ghost:hover{background:var(--v-50)}
+.btn.lg{height:54px;padding:0 28px;font-size:16px;border-radius:12px}
+
+/* hero */
+.hero{text-align:center;padding:96px 0 40px;position:relative}
+.hero::before{content:"";position:absolute;inset:-64px 0 auto;height:620px;z-index:-1;background:radial-gradient(60% 55% at 50% 0%,var(--v-100),transparent 70%)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:5px 12px 5px 6px;border-radius:99px;background:#fff;border:1px solid var(--line);font-size:13px;color:var(--muted);font-weight:500;margin-bottom:28px}
+.pill b{background:var(--v-100);color:var(--v-d);padding:2px 8px;border-radius:99px;font-weight:600;font-size:12px}
+h1{font-size:clamp(40px,7vw,72px);line-height:1.04;letter-spacing:-.035em;font-weight:700}
+h1 em{font-style:normal;color:var(--v)}
+.lead{max-width:560px;margin:22px auto 0;font-size:clamp(17px,2vw,19px);color:var(--muted)}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.meta{margin-top:16px;font-size:13px;color:var(--faint)}
+
+/* window */
+.shot{margin:64px auto 0;max-width:1000px;border-radius:16px;background:#fff;padding:0;overflow:hidden;box-shadow:0 0 0 1px rgba(31,29,43,.06),0 30px 80px -30px rgba(78,72,128,.45),0 12px 30px -18px rgba(31,29,43,.2)}
+.bar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);background:#FBFAFD}
+.bar i{width:11px;height:11px;border-radius:50%;background:#E4E1EE}
+
+/* sections */
+section{padding:110px 0}
+.kick{font-size:13px;font-weight:600;color:var(--v);letter-spacing:.06em;text-transform:uppercase}
+h2{font-size:clamp(30px,4.4vw,44px);line-height:1.12;letter-spacing:-.03em;font-weight:700;margin-top:10px}
+.sub{color:var(--muted);font-size:17px;max-width:560px;margin-top:14px}
+.center{text-align:center}.center .sub{margin-left:auto;margin-right:auto}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.f{padding:26px;border:1px solid var(--line);border-radius:var(--r);background:#fff;transition:border-color .2s,box-shadow .2s}
+.f:hover{border-color:var(--v-200);box-shadow:0 14px 34px -22px rgba(101,94,150,.6)}
+.f .ic{width:40px;height:40px;border-radius:10px;background:var(--v-50);color:var(--v);display:grid;place-items:center;margin-bottom:18px}
+.f h3{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.f p{color:var(--muted);font-size:14.5px;margin-top:6px}
+
+.split{display:grid;grid-template-columns:1fr 1.25fr;gap:64px;align-items:center}
+.split.rev{grid-template-columns:1.25fr 1fr}
+.split.rev .txt{order:2}
+.list{list-style:none;padding:0;margin-top:26px;display:grid;gap:14px}
+.list li{display:flex;gap:12px;color:var(--muted);font-size:15.5px}
+.list li svg{color:var(--v);margin-top:3px;width:18px;height:18px}
+.list b{color:var(--ink);font-weight:600}
+.frame{border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px rgba(31,29,43,.07),0 24px 60px -30px rgba(78,72,128,.5)}
+
+.soft{background:var(--v-50);border-radius:28px;margin:0 16px}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px;counter-reset:s}
+.st{background:#fff;border-radius:var(--r);padding:28px;border:1px solid var(--line)}
+.st::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--v);color:#fff;font-weight:600;font-size:14px;margin-bottom:16px}
+.st h3{font-size:16px;font-weight:600}
+.st p{color:var(--muted);font-size:14.5px;margin-top:6px}
+.note{margin-top:22px;display:flex;gap:12px;align-items:flex-start;padding:16px 18px;border-radius:12px;background:#fff;border:1px solid var(--line);color:var(--muted);font-size:14.5px}
+.note svg{color:var(--v);margin-top:2px}
+.note b{color:var(--ink)}
+
+.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:48px}
+.specs div{background:#fff;padding:22px}
+.specs small{display:block;color:var(--faint);font-size:12.5px;font-weight:500}
+.specs b{display:block;font-size:16px;font-weight:600;margin-top:4px}
+
+.faq{max-width:720px;margin:48px auto 0}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:22px 0;font-weight:600;font-size:16px;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--faint);font-weight:400;font-size:22px;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);padding:0 0 22px;font-size:15px;max-width:640px}
+
+.final{text-align:center;padding:96px 24px;border-radius:28px;margin:0 16px;background:linear-gradient(160deg,#6E67A3,#4E4880);color:#fff;position:relative;overflow:hidden}
+.final::after{content:"";position:absolute;inset:auto -10% -60% -10%;height:120%;background:radial-gradient(50% 50% at 50% 50%,rgba(255,255,255,.14),transparent 70%)}
+.final h2{color:#fff}
+.final .sub{color:rgba(255,255,255,.75)}
+.final .btn{background:#fff;color:var(--v-d);position:relative;z-index:1}
+.final .btn:hover{background:var(--v-50);transform:translateY(-1px)}
+.final .meta{color:rgba(255,255,255,.6);position:relative;z-index:1}
+
+footer{padding:48px 0 56px;color:var(--faint);font-size:13.5px}
+footer .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+footer .brand{font-size:14px;color:var(--ink)}
+footer .brand img{width:22px;height:22px}
+footer span:last-child{margin-left:auto}
+
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+@media (max-width:900px){
+  .grid,.steps{grid-template-columns:1fr 1fr}
+  .split,.split.rev{grid-template-columns:1fr;gap:36px}
+  .split.rev .txt{order:0}
+  .specs{grid-template-columns:1fr 1fr}
+  .links a:not(.btn){display:none}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  .grid,.steps{grid-template-columns:1fr}
+  section{padding:76px 0}
+  .hero{padding-top:64px}
+  .soft,.final{margin:0;border-radius:0}
+  .bar{display:none}
+}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#"><img src="img/logo.png" alt="">NatNote</a>
+    <nav class="links">
+      <a href="#fonctions">Fonctionnalités</a>
+      <a href="#installer">Installer</a>
+      <a href="#faq">Questions</a>
+      <a class="btn pri sm dl" href="https://github.com/ramahavonjynathan95-lang/natnote/releases/latest/download/NatNote.exe">Télécharger</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero wrap">
+    <span class="pill"><b>Nouveau</b> Interface épurée et synchro Google Drive</span>
+    <h1>Écrire,<br><em>simplement.</em></h1>
+    <p class="lead">NatNote est un traitement de texte léger et élégant pour Windows. Tout ce qu'il faut pour vos cours, exposés et lettres — rien de plus.</p>
+    <div class="cta">
+      <a class="btn pri lg dl" href="https://github.com/ramahavonjynathan95-lang/natnote/releases/latest/download/NatNote.exe">
+        <svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+        Télécharger pour Windows
+      </a>
+      <a class="btn ghost lg" href="#fonctions">Découvrir</a>
+    </div>
+    <p class="meta">Gratuit · Version 0.1 · Windows 10 et 11 (64 bits) · 78 Mo</p>
+    <div class="shot rv">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <img src="img/accueil.png" alt="Écran d'accueil de NatNote avec les documents récents et les modèles" width="1440" height="790">
+    </div>
+  </div>
+
+  <section id="fonctions">
+    <div class="wrap">
+      <div class="center rv">
+        <div class="kick">Fonctionnalités</div>
+        <h2>Tout l'essentiel,<br>sans le superflu.</h2>
+        <p class="sub">Une interface calme qui laisse toute la place à votre texte.</p>
+      </div>
+      <div class="grid">
+        <div class="f rv"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><h3>Compatible Word</h3><p>Ouvrez et enregistrez vos fichiers .docx, exportez en PDF en un clic.</p></div>
+        <div class="f rv"><div class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></div><h3>Modèles prêts</h3><p>CV, lettre, rapport, compte rendu, facture : démarrez en quelques secondes.</p></div>
+        <div class="f rv"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12 3.5 3.5 0 0 0 6 19z"/></svg></div><h3>Synchro Google Drive</h3><p>Connectez votre compte Google : documents et réglages vous suivent partout.</p></div>
+        <div class="f rv"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/></svg></div><h3>Mode focus</h3><p>Plein écran, sans distraction. Zoomez avec Ctrl + molette.</p></div>
+        <div class="f rv"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div><h3>Mise en forme rapide</h3><p>Sélectionnez du texte : une barre apparaît avec police, taille, couleur et surlignage.</p></div>
+        <div class="f rv"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg></div><h3>Paramètres prédéfinis</h3><p>Une charte (police, marges, titres) appliquée à tous vos documents, d'un clic.</p></div>
+        <div class="f rv"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div><h3>Navigation par titres</h3><p>Le plan du document toujours visible, pour sauter d'une partie à l'autre.</p></div>
+        <div class="f rv"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div><h3>Mode sombre</h3><p>Pour écrire le soir sans se fatiguer les yeux.</p></div>
+        <div class="f rv"><div class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><h3>Portable</h3><p>Un seul fichier, aucune installation. Fonctionne même depuis une clé USB.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap split rev">
+      <div class="txt rv">
+        <div class="kick">L'éditeur</div>
+        <h2>Une page blanche,<br>et vos idées.</h2>
+        <p class="sub">Le ruban se replie pour ne garder que l'essentiel. Rouvrez-le d'un clic quand vous en avez besoin.</p>
+        <ul class="list">
+          <li><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Styles de titres</b> cohérents en un clic</span></li>
+          <li><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Enregistrement</b> et récupération automatiques</span></li>
+          <li><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Recherche</b> dans le document avec Ctrl + F</span></li>
+          <li><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Raccourcis</b> familiers : Ctrl + S, Ctrl + B, Ctrl + Z…</span></li>
+        </ul>
+      </div>
+      <div class="frame rv"><img src="img/editeur.png" alt="L'éditeur de NatNote avec un document ouvert" width="1440" height="900"></div>
+    </div>
+  </section>
+
+  <section id="installer" class="soft">
+    <div class="wrap">
+      <div class="center rv">
+        <div class="kick">Installation</div>
+        <h2>Prêt en 30 secondes.</h2>
+        <p class="sub">Pas d'installateur, pas de compte obligatoire.</p>
+      </div>
+      <div class="steps">
+        <div class="st rv"><h3>Téléchargez</h3><p>Cliquez sur « Télécharger » pour récupérer le fichier NatNote.exe.</p></div>
+        <div class="st rv"><h3>Placez-le où vous voulez</h3><p>Bureau, dossier Documents ou clé USB : vos données restent à côté du fichier.</p></div>
+        <div class="st rv"><h3>Lancez-le</h3><p>Double-cliquez sur NatNote.exe. C'est tout, vous pouvez écrire.</p></div>
+      </div>
+      <div class="note rv">
+        <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg>
+        <span>Au premier lancement, Windows peut afficher « Windows a protégé votre ordinateur » car l'application est récente. Cliquez sur <b>Informations complémentaires</b>, puis sur <b>Exécuter quand même</b>.</span>
+      </div>
+      <div class="specs rv">
+        <div><small>Système</small><b>Windows 10 / 11</b></div>
+        <div><small>Architecture</small><b>64 bits</b></div>
+        <div><small>Taille</small><b>78 Mo</b></div>
+        <div><small>Prix</small><b>Gratuit</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="center rv">
+        <div class="kick">Questions</div>
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="faq rv">
+        <details><summary>NatNote est-il vraiment gratuit ?</summary><p>Oui, entièrement. Pas d'abonnement, pas de publicité, pas de version payante.</p></details>
+        <details><summary>Puis-je ouvrir mes documents Word ?</summary><p>Oui. NatNote ouvre et enregistre les fichiers .docx, et exporte aussi en PDF. Vos documents restent lisibles dans Word, Google Docs ou LibreOffice.</p></details>
+        <details><summary>Où sont enregistrés mes documents ?</summary><p>Sur votre ordinateur, dans le dossier de votre choix. Si vous connectez votre compte Google, une copie est aussi placée dans un dossier « NatNote » de votre Google Drive.</p></details>
+        <details><summary>Faut-il une connexion internet ?</summary><p>Non. NatNote fonctionne entièrement hors ligne. Internet n'est utile que pour la synchronisation Google Drive, qui est facultative.</p></details>
+        <details><summary>Fonctionne-t-il sur Mac ou Linux ?</summary><p>Pas pour l'instant : NatNote est disponible uniquement sur Windows 10 et 11 (64 bits).</p></details>
+        <details><summary>Comment le désinstaller ?</summary><p>Supprimez simplement le fichier NatNote.exe et le dossier « NatNote » créé à côté. Rien d'autre n'est installé sur votre ordinateur.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <div class="final rv">
+    <h2>Commencez à écrire.</h2>
+    <p class="sub" style="margin:14px auto 34px">Téléchargez NatNote gratuitement et ouvrez votre première page.</p>
+    <a class="btn lg dl" href="https://github.com/ramahavonjynathan95-lang/natnote/releases/latest/download/NatNote.exe">
+      <svg class="i" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+      Télécharger pour Windows
+    </a>
+    <p class="meta">Gratuit · Windows 10 et 11 · 78 Mo</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#"><img src="img/logo.png" alt="">NatNote</a>
+    <span>© 2026 NatNote</span>
+    <span><a href="#top">Retour en haut ↑</a></span>
+  </div>
+</footer>
+
+<script>
+  const h = document.querySelector('header');
+  addEventListener('scroll', () => h.classList.toggle('sc', scrollY > 8), { passive: true });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 70 + 'ms'; io.observe(el); });
+</script>
+</body>
+</html>
